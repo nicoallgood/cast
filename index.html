@@ -1,338 +1,475 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shop Digital Signage</title>
-  <!-- Load Google Fonts: Oswald for titles and banner; Montserrat for content -->
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      /* Approximate Pantone colors */
-      --pantone471: #D4BFAA;  /* Light beige */
-      --pantone4635: #7E6756; /* Rich brown */
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--pantone471);
-      font-family: 'Montserrat', sans-serif;
-      color: var(--pantone4635);
-      overflow: hidden;
-    }
-    /* Container for slides (leaving room for the banner) */
-    #slides {
-      position: relative;
-      width: 100%;
-      height: calc(100vh - 140px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    /* Each slide occupies the container; only the active one is visible */
-    .slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    .slide.active {
-      opacity: 1;
-    }
-    /* Styles for text slides */
-    .slide .title {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-family: 'Oswald', sans-serif;
-      font-size: 72px;
-      font-weight: 600;
-      text-align: left;
-      width: calc(100% - 40px);
-    }
-    .slide .content {
-      position: absolute;
-      top: 50%;
-      width: calc(100% - 40px);
-      font-size: 96px;
-      font-weight: 300;
-      text-align: center;
-      transform: translateY(-50%);
-    }
-    /* Banner at the bottom for date/time, message and weather */
-    #banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 140px;
-      background: #fff;
-      color: var(--pantone4635);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      box-sizing: border-box;
-      border-top: 3px solid var(--pantone4635);
-      font-family: 'Oswald', sans-serif;
-      font-size: 42px;
-    }
-    /* Banner sections */
-    #bannerLeft, #bannerCenter, #bannerRight {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    /* Banner left: date, saint (smaller) and time arranged vertically */
-    #bannerLeft > #bannerDate,
-    #bannerLeft > #bannerTime {
-      font-size: 42px;
-      line-height: 1.2;
-    }
-    #bannerLeft > #bannerSaint {
-      font-size: 28px;
-      line-height: 1.2;
-      margin: 4px 0;
-    }
-    /* Banner right: arrange as two columns */
-    #bannerRight {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-    }
-    #bannerRight .ascii {
-      margin-right: 10px;
-      font-size: 24px;
-      font-family: monospace;
-      line-height: 1.1;
-      white-space: pre;
-    }
-    #bannerRight .summary {
-      text-align: left;
-      font-size: 28px;
-      line-height: 1.2;
-    }
-    /* Center section expands */
-    #bannerCenter {
-      flex: 1;
-    }
-    /* Style for images */
-    img {
-      max-width: 90%;
-      max-height: 90%;
-      display: block;
-      margin: auto;
-      object-fit: contain;
-    }
-  </style>
-</head>
-<body>
-  <!-- Container for slides -->
-  <div id="slides"></div>
-  <!-- Banner for date/time, message and weather -->
-  <div id="banner">
-    <div id="bannerLeft">
-      <div id="bannerDate"></div>
-      <div id="bannerSaint"></div>
-      <div id="bannerTime"></div>
-    </div>
-    <div id="bannerCenter">
-      <div id="bannerMessage">(i) We are closed tomorrow</div>
-    </div>
-    <div id="bannerRight">
-      <div class="ascii" id="weatherAscii"></div>
-      <div class="summary" id="weatherSummary"></div>
-    </div>
-  </div>
-  
-  <script>
-    /*********************
-     * Configuration
-     *********************/
-    const slideDuration = 12000; // Each slide stays for 12 seconds.
-    let slideCounter = 1; // Global slide counter
-    
-    // Example content slides: two image slides and three text slides.
-    const contentSlides = [
-      { type: 'image', content: 'image1.jpeg' },
-      { type: 'image', content: 'image2.jpeg' },
-      { type: 'text', title: 'La Vitrine à Blague', content: 'Quelle est la différence entre un marin et un boucher?' },
-      { type: 'text', title: 'Le Dico du Boucher', content: 'Louchébem: son propre vocabulaire et ses règles de transformation.' },
-      { type: 'text', title: 'La Vitrine à Blague', content: 'Qui est l\'ami du feu?' }
-    ];
-    
-    // Screenshotmachine URL for the Meteoblue forecast (used for weather slides).
-    const screenshotMachineUrl = "https://api.screenshotmachine.com?key=c82f36" +
-      "&url=" + encodeURIComponent("https://www.meteoblue.com/fr/meteo/semaine/annecy_france_3037543?day=1") +
-      "&dimension=1920x1080" +
-      "&format=png" +
-      "&click=" + encodeURIComponent(".fc-cta-consent") +
-      "&delay=2000" +
-      "&crop=" + encodeURIComponent("400,70,1000,460") +
-      "&cacheLimit=0.5";
-    
-    // Inline saints data (one-liner JSON).
-    const saintsData = {"january":[["Jour de l'An",""],["Basile","Saint"],["Geneviève","Sainte"],["Odilon","Saint"],["Edouard","Saint"],["Mélaine","Saint"],["Raymond","Saint"],["Lucien","Saint"],["Alix","Sainte"],["Guillaume","Saint"],["Pauline","Saint"],["Tatiana","Sainte"],["Yvette","Sainte"],["Nina","Sainte"],["Rémi","Saint"],["Marcel","Saint"],["Roseline","Sainte"],["Prisca","Sainte"],["Marius","Saint"],["Sébastien","Saint"],["Agnès","Sainte"],["Vincent","Saint"],["Barnard","Saint"],["François de Sales","Saint"],["Conversion de Paul",""],["Paule","Sainte"],["Angèle","Sainte"],["Thomas d'Aquin","Saint"],["Gildas","Saint"],["Martine","Sainte"],["Marcelle","Sainte"]],"february":[["Ella","Sainte"],["Fête de la Présention",""],["Blaise","Saint"],["Véronique","Sainte"],["Agathe","Sainte"],["Gaston","Saint"],["Eugènie","Sainte"],["Jacqueline","Sainte"],["Apolline","Sainte"],["Arnaud","Saint"],["Notre Dame de Lourdes","Sainte"],["Félix","Saint"],["Béatrice","Sainte"],["Valentin","Saint"],["Claude","Saint"],["Julienne","Sainte"],["Alexis","Saint"],["Bernadette","Sainte"],["Gabin","Saint"],["Aimée","Sainte"],["Mercredi des Cendres",""],["Isabelle","Sainte"],["Lazare","Saint"],["Modeste","Sainte"],["Roméo","Saint"],["Nestor","Saint"],["Honorine","Sainte"],["Romain","Saint"],["Auguste","Saint"]],"march":[["Aubin","Saint"],["Charles le Bon","Saint"],["Guénolé","Saint"],["Casimir","Saint"],["Olive","Saint"],["Colette","Sainte"],["Félicité","Sainte"],["Jean de Dieu","Saint"],["Françoise","Sainte"],["Vivien","Saint"],["Rosine","Sainte"],["Justine","Sainte"],["Rodrigue","Saint"],["Mathilde","Sainte"],["Louise","Sainte"],["Bénédicte","Sainte"],["Patrice","Saint"],["Cyrille","Saint"],["Joseph","Saint"],["Herbert","Saint"],["Clémence","Sainte"],["Léa","Sainte"],["Victorien","Saint"],["Karine","Sainte"],["Anne","Sainte"],["Larissa","Sainte"],["Habib","Saint"],["Gontran","Saint"],["Gwladys","Sainte"],["Amédée","Saint"],["Benjamin","Saint"]],"april":[["Hugues","Saint"],["Sandrine","Sainte"],["Richard","Saint"],["Isidore","Saint"],["Irène","Sainte"],["Marcellin","Saint"],["Jean-Baptiste de la Salle","Saint"],["Julie","Sainte"],["Gautier","Saint"],["Fulbert","Saint"],["Stanislas","Saint"],["Jules","Saint"],["Ida","Sainte"],["Maxime","Saint"],["Paterne","Saint"],["Benoît-Joseph","Saint"],["Anicet","Saint"],["Parfait","Saint"],["Emma","Sainte"],["Odette","Sainte"],["Anselme","Saint"],["Alexandre","Saint"],["Georges","Saint"],["Fidèle","Saint"],["Marc","Saint"],["Alida","Sainte"],["Zita","Sainte"],["Valérie","Sainte"],["Catherine de Sienne","Sainte"],["Robert","Saint"]],"may":[["Fête du travail",""],["Boris","Saint"],["Philippe","Saint"],["Sylvain","Saint"],["Judith","Saint"],["Prudence","Saint"],["Gisèle","Sainte"],["Armistice de 1945",""],["Pacôme","Saint"],["Solange","Sainte"],["Estelle","Sainte"],["Achille","Saint"],["Rolande","Sainte"],["Matthias","Saint"],["Denise","Sainte"],["Honoré","Saint"],["Pascal","Saint"],["Eric","Saint"],["Yves","Saint"],["Bernardin","Saint"],["Constantin","Saint"],["Emile","Saint"],["Didier","Saint"],["Donatien","Saint"],["Sophie","Sainte"],["Bérenger","Saint"],["Augustin","Saint"],["Germain","Saint"],["Aymar","Saint"],["Ferdinand","Saint"],["Ferdinand","Saint"]],"june":[["Justin","Saint"],["Blandine","Sainte"],["Kévin","Saint"],["Clotilde","Sainte"],["Igor","Saint"],["Norbert","Saint"],["Gilbert","Saint"],["Médard","Saint"],["Diane","Sainte"],["Landry","Saint"],["Barnabé","Saint"],["Guy","Saint"],["Antoine de Padoue","Saint"],["Elisée","Sainte"],["Germaine","Sainte"],["Jean-François Régis","Saint"],["Hervé","Saint"],["Léonce","Saint"],["Romuald","Saint"],["Silvère","Saint"],["Solstice d'été",""],["Alban","Saint"],["Audrey","Sainte"],["Jean-Baptiste","Saint"],["Prosper","Saint"],["Anthelme","Saint"],["Fernand","Saint"],["Irénée","Saint"],["Pierre","Saint"],["Martial","Saint"]],"july":[["Thierry","Saint"],["Martinien","Saint"],["Thomas","Saint"],["Florent","Saint"],["Antoine","Saint"],["Mariette","Sainte"],["Raoul","Saint"],["Thibault","Saint"],["Amandine","Sainte"],["Ulrich","Saint"],["Benoît","Saint"],["Olivier","Saint"],["Henri","Saint"],["Fête Nationale",""],["Donald",""],["Fête de Notre Dame du Mont Carmel",""],["Charlotte","Sainte"],["Frédéric","Saint"],["Arsène","Saint"],["Marina","Sainte"],["Victor","Saint"],["Marie-Madeleine","Sainte"],["Brigitte","Sainte"],["Christine","Sainte"],["Jacques","Saint"],["Anne","Sainte"],["Nathalie","Sainte"],["Samson","Saint"],["Marthe","Sainte"],["Juliette","Sainte"],["Ignace de Loyola","Saint"]],"august":[["Alphonse","Saint"],["Julien Eymard","Saint"],["Lydie","Sainte"],["Jean-Marie Vianney","Saint"],["Abel","Saint"],["Fête de la Transfiguration",""],["Gaétan","Saint"],["Dominique","Saint"],["Amour","Saint"],["Laurent","Saint"],["Claire","Sainte"],["Clarisse","Sainte"],["Hippolyte","Saint"],["Evrard","Saint"],["Fête de l'Assomption",""],["Armel","Sainte"],["Hyacinthe","Saint"],["Hélène","Sainte"],["Jean-Eudes","Saint"],["Bernard","Saint"],["Christophe","Saint"],["Fabrice","Saint"],["Rose de Lima","Sainte"],["Barthélémy","Saint"],["Louis","Saint"],["Natacha","Sainte"],["Monique","Sainte"],["Augustin","Saint"],["Sabine","Sainte"],["Fiacre","Saint"],["Aristide","Saint"]],"september":[["Gilles","Saint"],["Ingrid","Sainte"],["Grégoire","Saint"],["Rosalie","Sainte"],["Raïssa","Sainte"],["Bertrand","Saint"],["Reine","Sao,te"],["Fête de la Nativité",""],["Alain","Saint"],["Inès","Sainte"],["Adelphe","Saint"],["Apollinaire","Saint"],["Aimé","Saint"],["Fête de la Croix Glorieuse",""],["Roland","Saint"],["Edith","Sainte"],["Renaud","Saint"],["Nadège","Sainte"],["Emilie","Sainte"],["Davy","Saint"],["Matthieu","Saint"],["Maurice","Saint"],["Equinoxe d'Automne",""],["Thècle","Sainte"],["Hermann","Saint"],["Côme","Saint"],["Vincent de Paul","Saint"],["Venceslas","Saint"],["Michel","Saint"],["Jérôme","Saint"]],"october":[["Thérèse de l'Enfant Jésus","Sainte"],["Léger","Saint"],["Gérard","Saint"],["François d'Assise","Saint"],["Fleur","Sainte"],["Bruno","Saint"],["Serge","Saint"],["Pélagie","Sainte"],["Denis","Saint"],["Ghislain","Saint"],["Firmin","Saint"],["Wilfried","Saint"],["Géraud","Saint"],["Juste","Saint"],["Thérèse d'Avila","Saint"],["Edwige","Sainte"],["Baudoin","Saint"],["Luc","Saint"],["René","Saint"],["Adeline","Sainte"],["Céline","Sainte"],["Elodie","Sainte"],["Jean de Capistran","Saint"],["Florentin","Saint"],["Crépin","Saint"],["Dimitri","Saint"],["Emeline","Sainte"],["Jude","Saint"],["Narcisse","Saint"],["Bienvenue","Sainte"],["Quentin","Saint"]],"november":[["Toussaint",""],["Fête des défunts",""],["Hubert","Saint"],["Charles","Saint"],["Sylvie","Sainte"],["Bertille","Sainte"],["Carine","Sainte"],["Geoffroy","Saint"],["Théodore","Saint"],["Léon","Saint"],["Armistice de 1918",""],["Christian","Saint"],["Brice","Saint"],["Sidoine","Saint"],["Albert","Saint"],["Marguerite","Sainte"],["Elisabeth","Sainte"],["Aude","Sainte"],["Tanguy","Saint"],["Edmond","Saint"],["Présence de Marie",""],["Cécile","Sainte"],["Clément","Saint"],["Flora","Sainte"],["Catherine","Sainte"],["Delphine","Sainte"],["Sévrin","Saint"],["Jacques de la Marche","Saint"],["Saturnin","Saint"],["André","Saint"]],"december":[["Florence","Sainte"],["Viviane","Sainte"],["François-Xavier","Saint"],["Barbara","Sainte"],["Gérald","Saint"],["Nicolas","Saint"],["Ambroise","Sainte"],["Fête de l'Immaculée Conception",""],["Pierre Fourier","Saint"],["Romaric","Saint"],["Daniel","Saint"],["Jeanne-Françoise de Chantal","Sainte"],["Lucie","Sainte"],["Odile","Sainte"],["Ninon","Sainte"],["Alice","Sainte"],["Gaël","Saint"],["Gatien","Saint"],["Urbain","Saint"],["Théophile","Saint"],["Solstice d'Hiver",""],["Françoise-Xavière","Sainte"],["Armand","Saint"],["Adèle","Sainte"],["Noël",""],["Etienne","Saint"],["Jean","Saint"],["Innocents","Saints"],["David","Saint"],["Roger","Saint"],["Sylvestre","Saint"]]};
-    
-    /*********************
-     * Slide Rendering Logic
-     *********************/
-    function getSlideData(counter) {
-      if (counter % 5 === 0) {
-        return { type: 'weather', content: screenshotMachineUrl };
-      } else {
-        let weatherCount = Math.floor(counter / 5);
-        let contentIndex = (counter - weatherCount - 1) % contentSlides.length;
-        return contentSlides[contentIndex];
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shop Digital Signage</title>
+    <!-- Load Google Fonts: Oswald for titles and banner; Montserrat for content -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Approximate Pantone colors */
+        --pantone471: #d4bfaa; /* Light beige */
+        --pantone4635: #7e6756; /* Rich brown */
       }
-    }
-    
-    function renderSlide() {
-      const slidesContainer = document.getElementById('slides');
-      slidesContainer.innerHTML = "";
-      const slideData = getSlideData(slideCounter);
-      const slideEl = document.createElement('div');
-      slideEl.classList.add('slide');
-      
-      if (slideData.type === 'image' || slideData.type === 'weather') {
-        const imgEl = document.createElement('img');
-        imgEl.src = slideData.content;
-        slideEl.appendChild(imgEl);
-      } else if (slideData.type === 'text') {
-        const titleEl = document.createElement('div');
-        titleEl.classList.add('title');
-        titleEl.textContent = slideData.title;
-        
-        const contentEl = document.createElement('div');
-        contentEl.classList.add('content');
-        contentEl.textContent = slideData.content;
-        
-        slideEl.appendChild(titleEl);
-        slideEl.appendChild(contentEl);
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--pantone471);
+        font-family: "Montserrat", sans-serif;
+        color: var(--pantone4635);
+        overflow: hidden;
       }
-      
-      slidesContainer.appendChild(slideEl);
-      setTimeout(() => slideEl.classList.add('active'), 100);
-    }
-    
-    function nextSlide() {
-      slideCounter++;
-      renderSlide();
-    }
-    
-    function previousSlide() {
-      slideCounter = slideCounter > 1 ? slideCounter - 1 : 1;
-      renderSlide();
-    }
-    
-    setInterval(nextSlide, slideDuration);
-    renderSlide();
-    
-    document.addEventListener('keydown', function(event) {
-      if (event.key === "ArrowRight") {
-        nextSlide();
-      } else if (event.key === "ArrowLeft") {
-        previousSlide();
+      /* Container for slides (leaving room for the banner) */
+      #slides {
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 140px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-    });
-    
-    /*********************
-     * Banner Updates
-     *********************/
-     function updateBannerDateTime() {
-  const bannerDateEl = document.getElementById('bannerDate');
-  const bannerTimeEl = document.getElementById('bannerTime');
-  const bannerSaintEl = document.getElementById('bannerSaint');
-  const now = new Date();
-  const dateOptions = { weekday: 'long', month: 'long', day: 'numeric' };
-  let dateStr = now.toLocaleDateString('fr-FR', dateOptions);
-  dateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-  bannerDateEl.textContent = dateStr;
-  const timeOptions = { hour: '2-digit', minute: '2-digit' };
-  bannerTimeEl.textContent = now.toLocaleTimeString('fr-FR', timeOptions);
-  
-  const saint = getSaintOfDay();
-  bannerSaintEl.textContent = saint ? "Bonne fête " + saint + "!" : "";
-}
-    setInterval(updateBannerDateTime, 1000);
-    updateBannerDateTime();
-    
-    function updateBannerWeather() {
-      const asciiDiv = document.getElementById('weatherAscii');
-      const summaryDiv = document.getElementById('weatherSummary');
-      
-      fetch("https://wtttr.in/Annecy?lang=fr&0&M")
-        .then(response => response.text())
-        .then(ascii => {
-          let pre = document.createElement("pre");
-          pre.style.margin = "0";
-          pre.style.fontFamily = "monospace";
-          pre.textContent = ascii;
-          asciiDiv.innerHTML = "";
-          asciiDiv.appendChild(pre);
-        })
-        .catch(err => {
-          asciiDiv.textContent = "";
-        });
-      
-      fetch("https://wttr.in/Annecy?format=j1")
-        .then(response => response.json())
-        .then(data => {
-          const current = data.current_condition[0];
-          const weather = data.weather[0];
-          const astro = weather.astronomy[0];
-          const temp = current.temp_C;
-          const wind = current.windspeedKmph;
-          const minTemp = weather.mintempC;
-          const maxTemp = weather.maxtempC;
-          const moonIllum = astro.moon_illumination;
-          const illum = parseInt(moonIllum, 10);
-          let moonEmoji = "";
-          if (illum < 25) {
-            moonEmoji = "🌑";
-          } else if (illum < 50) {
-            moonEmoji = "🌒";
-          } else if (illum < 75) {
-            moonEmoji = "🌓";
-          } else {
-            moonEmoji = "🌔";
-          }
-          const summaryText = `Temp: ${temp}°C (Min: ${minTemp}°C, Max: ${maxTemp}°C)<br>
-Vent: ${wind} km/h<br>
-Lune: ${moonEmoji} (${illum}%)`;
-          summaryDiv.innerHTML = summaryText;
-        })
-        .catch(err => {
-          summaryDiv.textContent = "Résumé météo indisponible";
-        });
-    }
-    setInterval(updateBannerWeather, 60000);
-    updateBannerWeather();
-    
-    /*********************
-     * Saint-of-Day Lookup
-     *********************/
-// Updated getSaintOfDay() to return a string (synchronously)
-function getSaintOfDay() {
-  const monthNames = ["january","february","march","april","may","june","july","august","september","october","november","december"];
-  const now = new Date();
-  const monthKey = monthNames[now.getMonth()];
-  const dayIndex = now.getDate() - 1;
-  if (saintsData[monthKey] && saintsData[monthKey][dayIndex]) {
-    const entry = saintsData[monthKey][dayIndex];
-    return entry[1] ? entry[0] : "";
-  }
-  return "";
-}
+      /* Each slide occupies the container; only the active one is visible */
+      .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .slide.active {
+        opacity: 1;
+      }
+      /* Additional class for image slides with dark background */
+      .image-slide {
+        background-color: #000;
+      }
+      /* Styles for text slides */
+      .slide .title {
+        position: absolute;
+        top: 40px; /* Increased spacing */
+        left: 20px;
+        font-family: "Oswald", sans-serif;
+        font-size: 72px;
+        font-weight: 600;
+        text-align: left;
+        width: calc(100% - 40px);
+      }
+      .slide .content {
+        position: absolute;
+        top: 50%;
+        width: calc(100% - 40px);
+        font-size: 96px;
+        font-weight: 300;
+        text-align: center;
+        transform: translateY(-50%);
+      }
+      /* Banner at the bottom for date/time and weather */
+      #banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 140px;
+        background: #fff;
+        color: var(--pantone4635);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        box-sizing: border-box;
+        border-top: 5px solid var(--pantone4635);
+        font-family: "Oswald", sans-serif;
+      }
+      /* Banner sections */
+      #bannerLeft,
+      #bannerCenter,
+      #bannerRight {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      /* Banner left: only date (big font) */
+      #bannerLeft > #bannerDate {
+        font-size: 64px;
+        line-height: 1.2;
+        transition: opacity 0.5s ease;
+      }
+      /* Banner center: only hour (big font) */
+      #bannerCenter > #bannerTime {
+        font-size: 74px;
+        line-height: 1.2;
+      }
+      /* Banner right: arrange as two columns for weather summary */
+      #bannerRight {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      #bannerRight .ascii {
+        margin-right: 10px;
+        font-size: 24px;
+        font-family: monospace;
+        line-height: 1.1;
+        white-space: pre;
+      }
+      #bannerRight .summary {
+        text-align: left;
+        font-size: 40px;
+        line-height: 1.4;
+      }
+      /* Additional smaller text for temperature range and units */
+      .tempRange,
+      .small {
+        font-size: 32px;
+      }
+      .moon {
+        font-size: 32px;
+        margin-left: 10px;
+      }
 
-  </script>
-</body>
+      .arrow {
+        font-family: "Roboto Condensed", sans-serif;
+        font-size: 0.5em; /* Adjust as needed */
+      }
+
+      .blinkColon {
+        display: inline-block;
+        width: 0.6ch;
+        text-align: center;
+      }
+
+      /* For image slides: full height, auto width */
+      .image-slide img {
+        height: 100%;
+        width: auto;
+      }
+      /* General image style */
+      img {
+        display: block;
+        margin: auto;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Container for slides -->
+    <div id="slides"></div>
+    <!-- Banner for date/time and weather -->
+    <div id="banner">
+      <div id="bannerLeft">
+        <div id="bannerDate"></div>
+      </div>
+      <div id="bannerCenter">
+        <div id="bannerTime"></div>
+      </div>
+      <div id="bannerRight">
+        <div class="ascii" id="weatherAscii"></div>
+        <div class="summary" id="weatherSummary"></div>
+      </div>
+    </div>
+
+    <!-- Optionally include your separate saints data via saintsData.js -->
+    <script src="saintsData.js"></script>
+
+    <script>
+      /*********************
+       * Configuration
+       *********************/
+      const slideDuration = 12000; // 12 seconds per slide.
+      let slideCounter = 1; // Global slide counter
+
+      // Example content slides.
+      const contentSlides = [
+        { type: "image", content: "image1.jpeg" },
+        { type: "image", content: "image2.jpeg" },
+        {
+          type: "text",
+          title: "La Vitrine à Blague",
+          content: "Quelle est la différence entre un marin et un boucher?",
+        },
+        {
+          type: "text",
+          title: "Le Dico du Boucher",
+          content:
+            "Louchébem: son propre vocabulaire et ses règles de transformation.",
+        },
+        {
+          type: "text",
+          title: "La Vitrine à Blague",
+          content: "Qui est l'ami du feu?",
+        },
+      ];
+
+      // Screenshotmachine URL for weather slides.
+      const screenshotMachineUrl =
+        "https://api.screenshotmachine.com?key=c82f36" +
+        "&url=" +
+        encodeURIComponent(
+          "https://www.meteoblue.com/fr/meteo/semaine/annecy_france_3037543?day=1"
+        ) +
+        "&dimension=1920x1080" +
+        "&format=png" +
+        "&click=" +
+        encodeURIComponent(".fc-cta-consent") +
+        "&delay=2000" +
+        "&crop=" +
+        encodeURIComponent("400,70,1000,460") +
+        "&cacheLimit=0.5";
+
+      /*********************
+       * Slide Rendering Logic
+       *********************/
+      function getSlideData(counter) {
+        if (counter % 5 === 0) {
+          return { type: "weather", content: screenshotMachineUrl };
+        } else {
+          let weatherCount = Math.floor(counter / 5);
+          let contentIndex =
+            (counter - weatherCount - 1) % contentSlides.length;
+          return contentSlides[contentIndex];
+        }
+      }
+
+      function renderSlide() {
+        const slidesContainer = document.getElementById("slides");
+        slidesContainer.innerHTML = "";
+        const slideData = getSlideData(slideCounter);
+        const slideEl = document.createElement("div");
+        slideEl.classList.add("slide");
+
+        // If this is an image slide, add a class for full-height image styling.
+        if (slideData.type === "image") {
+          slideEl.classList.add("image-slide");
+        }
+
+        if (slideData.type === "image" || slideData.type === "weather") {
+          const imgEl = document.createElement("img");
+          imgEl.src = slideData.content;
+          slideEl.appendChild(imgEl);
+        } else if (slideData.type === "text") {
+          const titleEl = document.createElement("div");
+          titleEl.classList.add("title");
+          titleEl.textContent = slideData.title;
+
+          const contentEl = document.createElement("div");
+          contentEl.classList.add("content");
+          contentEl.textContent = slideData.content;
+
+          slideEl.appendChild(titleEl);
+          slideEl.appendChild(contentEl);
+        }
+
+        slidesContainer.appendChild(slideEl);
+        setTimeout(() => slideEl.classList.add("active"), 100);
+      }
+
+      function nextSlide() {
+        slideCounter++;
+        renderSlide();
+      }
+
+      function previousSlide() {
+        slideCounter = slideCounter > 1 ? slideCounter - 1 : 1;
+        renderSlide();
+      }
+
+      setInterval(nextSlide, slideDuration);
+      renderSlide();
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          nextSlide();
+        } else if (event.key === "ArrowLeft") {
+          previousSlide();
+        }
+      });
+
+      /*********************
+       * Banner Updates
+       *********************/
+      let lastBannerDateText = "";
+      function updateBannerDateTime() {
+        const bannerDateEl = document.getElementById("bannerDate");
+        const bannerTimeEl = document.getElementById("bannerTime");
+
+        const now = new Date();
+
+        const dateOptions = { weekday: "long", month: "long", day: "numeric" };
+        let dateStr = now.toLocaleDateString("fr-FR", dateOptions);
+        dateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+
+        // Use a 30-second cycle: first 20 seconds show the date, last 10 seconds show the saint.
+        const cycle = Date.now() % 30000;
+        let newText;
+        if (cycle >= 20000) {
+          newText = getSaintOfDay(); // getSaintOfDay() returns a string synchronously
+          newText = newText ? "Bonne fête " + newText + "!" : "";
+        } else {
+          newText = dateStr;
+        }
+
+        // Only animate if the text is changing.
+        if (newText !== lastBannerDateText) {
+          bannerDateEl.style.opacity = 0;
+          setTimeout(() => {
+            bannerDateEl.textContent = newText;
+            bannerDateEl.style.opacity = 1;
+            lastBannerDateText = newText;
+          }, 500);
+        }
+
+        // Build time string with seconds.
+        const hours = now.getHours().toString().padStart(2, "0");
+        const minutes = now.getMinutes().toString().padStart(2, "0");
+        // Create the blinking colon as an element
+        const blinkColon = document.createElement("span");
+        blinkColon.classList.add("blinkColon");
+        blinkColon.textContent = now.getSeconds() % 2 === 0 ? ":" : " ";
+
+        // Clear any previous content and append time parts
+        bannerTimeEl.textContent = hours;
+        bannerTimeEl.appendChild(blinkColon);
+        bannerTimeEl.append(minutes);
+      }
+
+      setInterval(updateBannerDateTime, 1000);
+      updateBannerDateTime();
+
+      function getWindArrow(direction) {
+        switch (direction) {
+          case "N":
+            return "↑";
+          case "NNE":
+            return "↑";
+          case "NE":
+            return "↗";
+          case "ENE":
+            return "↗";
+          case "E":
+            return "→";
+          case "ESE":
+            return "→";
+          case "SE":
+            return "↘";
+          case "SSE":
+            return "↘";
+          case "S":
+            return "↓";
+          case "SSW":
+            return "↓";
+          case "SW":
+            return "↙";
+          case "WSW":
+            return "↙";
+          case "W":
+            return "←";
+          case "WNW":
+            return "←";
+          case "NW":
+            return "↖";
+          case "NNW":
+            return "↖";
+          default:
+            return "";
+        }
+      }
+
+      function updateBannerWeather() {
+        const asciiDiv = document.getElementById("weatherAscii");
+        const summaryDiv = document.getElementById("weatherSummary");
+
+        fetch("https://wtttr.in/Annecy?lang=fr&0&M")
+          .then((response) => response.text())
+          .then((ascii) => {
+            let pre = document.createElement("pre");
+            pre.style.margin = "0";
+            pre.style.fontFamily = "monospace";
+            pre.textContent = ascii;
+            asciiDiv.innerHTML = "";
+            asciiDiv.appendChild(pre);
+          })
+          .catch((err) => {
+            asciiDiv.textContent = "";
+          });
+
+        fetch("https://wttr.in/Annecy?format=j1")
+          .then((response) => response.json())
+          .then((data) => {
+            const current = data.current_condition[0];
+            const weather = data.weather[0];
+            const astro = weather.astronomy[0];
+            const temp = current.temp_C;
+            const wind = current.windspeedKmph;
+            const windDir = current.winddir16Point;
+            const windArrow = getWindArrow(windDir);
+            const minTemp = weather.mintempC;
+            const maxTemp = weather.maxtempC;
+            const moonIllum = astro.moon_illumination;
+            const illum = parseInt(moonIllum, 10);
+            let moonEmoji = "";
+            if (illum < 25) {
+              moonEmoji = "🌑";
+            } else if (illum < 50) {
+              moonEmoji = "🌒";
+            } else if (illum < 75) {
+              moonEmoji = "🌓";
+            } else {
+              moonEmoji = "🌔";
+            }
+            const summaryText = `Temp. ${temp}°C <span class="tempRange">(${minTemp}°-${maxTemp}°)</span><br>
+<div style="display:flex; justify-content: space-between; align-items: center;">
+  <span>Vent: <span class="arrow">${windArrow}</span> ${wind}<span class="small">km/h</span></span>
+  <span class="moon">${moonEmoji}</span>
+</div>`;
+            summaryDiv.innerHTML = summaryText;
+          })
+          .catch((err) => {
+            summaryDiv.textContent = "Résumé météo indisponible";
+          });
+      }
+
+      setInterval(updateBannerWeather, 60000);
+      updateBannerWeather();
+
+      /*********************
+       * Saint-of-Day Lookup
+       *********************/
+      function getSaintOfDay() {
+        const monthNames = [
+          "january",
+          "february",
+          "march",
+          "april",
+          "may",
+          "june",
+          "july",
+          "august",
+          "september",
+          "october",
+          "november",
+          "december",
+        ];
+        const now = new Date();
+        const monthKey = monthNames[now.getMonth()];
+        const dayIndex = now.getDate() - 1;
+        if (saintsData[monthKey] && saintsData[monthKey][dayIndex]) {
+          const entry = saintsData[monthKey][dayIndex];
+          return entry[1] ? entry[0] : "";
+        }
+        return "";
+      }
+    </script>
+  </body>
 </html>
