@@ -65,20 +65,38 @@
         text-align: left;
         width: calc(100% - 40px);
       }
-      .slide .content {
+      .content {
         position: absolute;
         top: 50%;
-        width: calc(100% - 40px);
+        width: 900px;
         font-size: 96px;
         font-weight: 300;
         text-align: center;
         transform: translateY(-50%);
+        display: block;
+        height: 300px; /* Set this to a fixed value that works for your design */
+        overflow: hidden;
       }
+
+      .fitme {
+        display: block;
+        width: 900px; /* or the fixed width you need */
+        height: 300px; /* or the fixed height you need */
+        overflow: hidden;
+      }
+
+      /* New styling for the sidenote (for text slides) */
+      .slide .sidenote {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 44px; /* Same as date font size */
+        text-align: right;
+      }
+
       /* Banner at the bottom for date/time and weather */
       #banner {
-        position: fixed;
-        bottom: 0;
-        left: 0;
+        position: relative;
         width: 100%;
         height: 140px;
         background: #fff;
@@ -91,10 +109,22 @@
         border-top: 5px solid var(--pantone4635);
         font-family: "Oswald", sans-serif;
       }
-      /* Banner sections */
+      /* Force the center section to be exactly centered */
+      #bannerCenter {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      #bannerCenter > #bannerTime {
+        font-size: 74px;
+        line-height: 1.2;
+      }
+
+      /* Banner sections for left and right remain in the document flow */
       #bannerLeft,
-      #bannerCenter,
       #bannerRight {
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -105,11 +135,6 @@
         font-size: 64px;
         line-height: 1.2;
         transition: opacity 0.5s ease;
-      }
-      /* Banner center: only hour (big font) */
-      #bannerCenter > #bannerTime {
-        font-size: 74px;
-        line-height: 1.2;
       }
       /* Banner right: arrange as two columns for weather summary */
       #bannerRight {
@@ -138,18 +163,15 @@
         font-size: 32px;
         margin-left: 10px;
       }
-
       .arrow {
         font-family: "Roboto Condensed", sans-serif;
         font-size: 0.5em; /* Adjust as needed */
       }
-
       .blinkColon {
         display: inline-block;
         width: 0.6ch;
         text-align: center;
       }
-
       /* For image slides: full height, auto width */
       .image-slide img {
         height: 100%;
@@ -182,6 +204,7 @@
 
     <!-- Optionally include your separate saints data via saintsData.js -->
     <script src="saintsData.js"></script>
+    <script src="https://unpkg.com/textfit@2.3.1/textFit.min.js"></script>
 
     <script>
       /*********************
@@ -190,25 +213,239 @@
       const slideDuration = 12000; // 12 seconds per slide.
       let slideCounter = 1; // Global slide counter
 
-      // Example content slides.
-      const contentSlides = [
-        { type: "image", content: "image1.jpeg" },
-        { type: "image", content: "image2.jpeg" },
+      const photoSlides = [
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2024/09/Wellington-de-Chasse.jpg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2024/02/AFFICHE-BOUCHERIES-FINAL-Publication-Instagram-1.jpg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2021/02/IMG_7968-2-edited-scaled.jpg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2020/03/IMG_5239.png",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2019/03/100_0055_ws1036603047.jpg",
+        },
+
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2018/09/race-reconnue-zoom.jpg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2017/03/Little-marcel-2.jpg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2017/03/droppedImage.jpg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2019/03/100_0055_ws1036603047.jpg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2019/03/100_0055_ws1036603047.jpg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2019/03/100_0055_ws1036603047.jpg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-1.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-2.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-3.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-4.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-5.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-6.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-7.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-8.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-9.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-10.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-11.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-12.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-13.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-14.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-15.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-16.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-17.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-18.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-19.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-20.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-21.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-22.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-23.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-24.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-25.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-26.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-28.jpeg",
+        },
+        {
+          type: "image",
+          content:
+            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-29.jpeg",
+        },
+      ];
+
+      // Example content slides. (You can add a "sidenote" property to text slides.)
+      const textSlides = [
         {
           type: "text",
-          title: "La Vitrine à Blague",
+          title: "La Vitrine à Blagues",
           content: "Quelle est la différence entre un marin et un boucher?",
+          sidenote: "Demandez la réponse à votre artisan!",
         },
         {
           type: "text",
           title: "Le Dico du Boucher",
           content:
             "Louchébem: son propre vocabulaire et ses règles de transformation.",
+          sidenote: "Note additionnelle",
         },
         {
           type: "text",
           title: "La Vitrine à Blague",
           content: "Qui est l'ami du feu?",
+          sidenote: "Indice: c'est un plat servi par votre boucher",
+        },
+        {
+          type: "text",
+          title: "À déguster cette semaine",
+          content:
+            "Nos tripes cuisinées, lasagnes, ou encore la tête de veau cuite",
+          sidenote: "Indice: c'est un plat servi par votre boucher",
+        },
+        {
+          type: "text",
+          title: "",
+          content:
+            "La viande fabrique de l'amitié, du respect. C'est un produit si noble qu'il génère comme aucun autre de la complicité et de l'humanité entre les hommes.",
+          sidenote: "",
         },
       ];
 
@@ -231,14 +468,25 @@
       /*********************
        * Slide Rendering Logic
        *********************/
+      // Declare a global counter for photo slides.
+      let photoGlobalCounter = 0;
+
       function getSlideData(counter) {
-        if (counter % 5 === 0) {
-          return { type: "weather", content: screenshotMachineUrl };
+        const cycleIndex = (counter - 1) % 5;
+        if (cycleIndex < 3) {
+          // Instead of always mapping cycleIndex to 0,1,2,
+          // use a global counter that advances each time a photo slide is needed.
+          let photoIndex = photoGlobalCounter % photoSlides.length;
+          photoGlobalCounter++;
+          return photoSlides[photoIndex];
+        } else if (cycleIndex === 3) {
+          // For the text slide, cycle through textSlides.
+          let textCycle = Math.floor((counter - 1) / 5);
+          let textIndex = textCycle % textSlides.length;
+          return textSlides[textIndex];
         } else {
-          let weatherCount = Math.floor(counter / 5);
-          let contentIndex =
-            (counter - weatherCount - 1) % contentSlides.length;
-          return contentSlides[contentIndex];
+          // For cycleIndex === 4, return the weather slide.
+          return { type: "weather", content: screenshotMachineUrl };
         }
       }
 
@@ -265,10 +513,38 @@
 
           const contentEl = document.createElement("div");
           contentEl.classList.add("content");
-          contentEl.textContent = slideData.content;
 
+          // Create a child container with fixed dimensions
+          const fitContainer = document.createElement("div");
+          fitContainer.classList.add("fitme");
+          // Set inline styles for fixed dimensions:
+          fitContainer.style.width = "900px";
+          fitContainer.style.height = "300px";
+          fitContainer.style.overflow = "hidden";
+          fitContainer.textContent = slideData.content;
+
+          contentEl.appendChild(fitContainer);
           slideEl.appendChild(titleEl);
           slideEl.appendChild(contentEl);
+
+          // Wait a brief moment to ensure the element is laid out,
+          // then call textFit:
+          setTimeout(() => {
+            textFit(fitContainer, {
+              alignHoriz: true,
+              alignVert: true,
+              multiLine: true,
+              maxFontSize: 96,
+            });
+          }, 50);
+
+          // If a sidenote exists, create and append it.
+          if (slideData.sidenote) {
+            const sidenoteEl = document.createElement("div");
+            sidenoteEl.classList.add("sidenote");
+            sidenoteEl.textContent = slideData.sidenote;
+            slideEl.appendChild(sidenoteEl);
+          }
         }
 
         slidesContainer.appendChild(slideEl);
@@ -314,7 +590,7 @@
         const cycle = Date.now() % 30000;
         let newText;
         if (cycle >= 20000) {
-          newText = getSaintOfDay(); // getSaintOfDay() returns a string synchronously
+          newText = getSaintOfDay(); // Synchronous lookup from saintsData.
           newText = newText ? "Bonne fête " + newText + "!" : "";
         } else {
           newText = dateStr;
@@ -333,17 +609,16 @@
         // Build time string with seconds.
         const hours = now.getHours().toString().padStart(2, "0");
         const minutes = now.getMinutes().toString().padStart(2, "0");
-        // Create the blinking colon as an element
+        // Create the blinking colon as an element.
         const blinkColon = document.createElement("span");
         blinkColon.classList.add("blinkColon");
         blinkColon.textContent = now.getSeconds() % 2 === 0 ? ":" : " ";
 
-        // Clear any previous content and append time parts
+        // Clear any previous content and append time parts.
         bannerTimeEl.textContent = hours;
         bannerTimeEl.appendChild(blinkColon);
         bannerTimeEl.append(minutes);
       }
-
       setInterval(updateBannerDateTime, 1000);
       updateBannerDateTime();
 
@@ -428,18 +703,17 @@
             } else {
               moonEmoji = "🌔";
             }
-            const summaryText = `Temp. ${temp}°C <span class="tempRange">(${minTemp}°-${maxTemp}°)</span><br>
-<div style="display:flex; justify-content: space-between; align-items: center;">
-  <span>Vent: <span class="arrow">${windArrow}</span> ${wind}<span class="small">km/h</span></span>
+            const summaryText = `Temp.: ${temp}°C <span class="tempRange">(${minTemp}° - ${maxTemp}°)</span><br>
+<div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+  <span>Vent: <span class="arrow">${windArrow}</span> ${wind}<span class="small"> km/h ${windDir}</span></span>
   <span class="moon">${moonEmoji}</span>
 </div>`;
             summaryDiv.innerHTML = summaryText;
           })
           .catch((err) => {
-            summaryDiv.textContent = "Résumé météo indisponible";
+            summaryDiv.textContent = "";
           });
       }
-
       setInterval(updateBannerWeather, 60000);
       updateBannerWeather();
 
