@@ -177,8 +177,6 @@
         width: 0.6ch;
         text-align: center;
       }
-
-
     </style>
   </head>
   <body>
@@ -209,7 +207,9 @@
       /*********************
        * Configuration
        *********************/
-      const slideDuration = 12000; // 12 seconds per slide.
+      const textSlideDuration = 12000; // 12 seconds per text slide.
+      const picSlideDuration = 7000; // 6 seconds per picture slide.
+      let autoAdvanceTimeout;
       let slideCounter = 1; // Global slide counter
 
       // Screenshotmachine URL for weather slides.
@@ -300,6 +300,10 @@
 
         slidesContainer.appendChild(slideEl);
         setTimeout(() => slideEl.classList.add("active"), 100);
+
+        // For photo and weather slides, use different durations.
+        const duration = slideData.type === "photo" ? picSlideDuration : textSlideDuration;
+        scheduleNextSlide(duration);
       }
 
       function renderTextSlide(slideData) {
@@ -351,6 +355,18 @@
             maxFontSize: 96,
           });
         }, 50);
+
+        setTimeout(() => {
+          nextSlide();
+        }, textSlideDuration); // For text slides, 12 seconds.
+      }
+
+      function scheduleNextSlide(duration) {
+        // Clear any existing timeout
+        clearTimeout(autoAdvanceTimeout);
+        autoAdvanceTimeout = setTimeout(() => {
+          nextSlide();
+        }, duration);
       }
 
       function nextSlide() {
@@ -363,7 +379,7 @@
         renderSlide();
       }
 
-      setInterval(nextSlide, slideDuration);
+      //setInterval(nextSlide, nextSlideIn);
       renderSlide();
 
       /*********************
@@ -541,15 +557,17 @@
 
       document.addEventListener("keydown", function (event) {
         if (event.key === "ArrowRight") {
+          clearTimeout(autoAdvanceTimeout);
           nextSlide();
         } else if (event.key === "ArrowLeft") {
+          clearTimeout(autoAdvanceTimeout);
           previousSlide();
         } else if (event.key === "ArrowUp") {
-          // Cycle backwards through text slides only.
+          clearTimeout(autoAdvanceTimeout);
           cheatTextCounter = cheatTextCounter > 0 ? cheatTextCounter - 1 : 0;
           renderCheatTextSlide();
         } else if (event.key === "ArrowDown") {
-          // Cycle forwards through text slides only.
+          clearTimeout(autoAdvanceTimeout);
           cheatTextCounter++;
           renderCheatTextSlide();
         }
