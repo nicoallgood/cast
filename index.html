@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Shop Digital Signage</title>
+    <title>Boc Cast</title>
     <!-- Load Google Fonts: Oswald for titles and banner; Montserrat for content -->
     <link
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Montserrat:wght@400;700&display=swap"
@@ -54,6 +54,11 @@
       .image-slide {
         background-color: #000;
       }
+      .image-slide img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
       /* Styles for text slides */
       .slide .title {
         position: absolute;
@@ -68,20 +73,20 @@
       .content {
         position: absolute;
         top: 50%;
-        width: 900px;
+        width: 1100px;
         font-size: 96px;
         font-weight: 300;
         text-align: center;
         transform: translateY(-50%);
         display: block;
-        height: 300px; /* Set this to a fixed value that works for your design */
+        height: 500px; /* Set this to a fixed value that works for your design */
         overflow: hidden;
       }
 
       .fitme {
         display: block;
-        width: 900px; /* or the fixed width you need */
-        height: 300px; /* or the fixed height you need */
+        width: 1100px; /* or the fixed width you need */
+        height: 500px; /* or the fixed height you need */
         overflow: hidden;
       }
 
@@ -172,17 +177,8 @@
         width: 0.6ch;
         text-align: center;
       }
-      /* For image slides: full height, auto width */
-      .image-slide img {
-        height: 100%;
-        width: auto;
-      }
-      /* General image style */
-      img {
-        display: block;
-        margin: auto;
-        object-fit: contain;
-      }
+
+
     </style>
   </head>
   <body>
@@ -204,6 +200,9 @@
 
     <!-- Optionally include your separate saints data via saintsData.js -->
     <script src="saintsData.js"></script>
+    <script src="pictures.js"></script>
+    <script src="jokes.js"></script>
+    <script src="text.js"></script>
     <script src="https://unpkg.com/textfit@2.3.1/textFit.min.js"></script>
 
     <script>
@@ -212,235 +211,6 @@
        *********************/
       const slideDuration = 12000; // 12 seconds per slide.
       let slideCounter = 1; // Global slide counter
-
-      const photoSlides = [
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2024/09/Wellington-de-Chasse.jpg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2024/02/AFFICHE-BOUCHERIES-FINAL-Publication-Instagram-1.jpg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2021/02/IMG_7968-2-edited-scaled.jpg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2020/03/IMG_5239.png",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2019/03/100_0055_ws1036603047.jpg",
-        },
-
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2018/09/race-reconnue-zoom.jpg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2017/03/Little-marcel-2.jpg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2017/03/droppedImage.jpg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2019/03/100_0055_ws1036603047.jpg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2019/03/100_0055_ws1036603047.jpg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2019/03/100_0055_ws1036603047.jpg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-1.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-2.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-3.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-4.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-5.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-6.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-7.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-8.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-9.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-10.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-11.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-12.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-13.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-14.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-15.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-16.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-17.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-18.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-19.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-20.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-21.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-22.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-23.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-24.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-25.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-26.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-28.jpeg",
-        },
-        {
-          type: "image",
-          content:
-            "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-29.jpeg",
-        },
-      ];
-
-      // Example content slides. (You can add a "sidenote" property to text slides.)
-      const textSlides = [
-        {
-          type: "text",
-          title: "La Vitrine à Blagues",
-          content: "Quelle est la différence entre un marin et un boucher?",
-          sidenote: "Demandez la réponse à votre artisan!",
-        },
-        {
-          type: "text",
-          title: "La Vitrine à Blague",
-          content: "Qui est l'ami du feu?",
-          sidenote: "Indice: c'est un plat servi par votre boucher",
-        },
-        {
-          type: "text",
-          title: "À déguster cette semaine",
-          content:
-            "Nos tripes cuisinées, lasagnes, ou encore la tête de veau cuite",
-          sidenote: "",
-        },
-        {
-          type: "text",
-          title: "",
-          content:
-            "La viande fabrique de l'amitié, du respect. C'est un produit si noble qu'il génère comme aucun autre de la complicité et de l'humanité entre les hommes.",
-          sidenote: "",
-        },
-      ];
 
       // Screenshotmachine URL for weather slides.
       const screenshotMachineUrl =
@@ -456,30 +226,52 @@
         "&delay=2000" +
         "&crop=" +
         encodeURIComponent("400,70,1000,460") +
+        "&zoom=200" +
         "&cacheLimit=0.5";
 
       /*********************
        * Slide Rendering Logic
        *********************/
       // Declare a global counter for photo slides.
-      let photoGlobalCounter = 0;
+      let photoCounter = 0;
+      let textCounter = 0;
 
       function getSlideData(counter) {
-        const cycleIndex = (counter - 1) % 5;
+        const cycleIndex = (counter - 1) % 5; // cycle positions: 0,1,2,3,4
         if (cycleIndex < 3) {
-          // Instead of always mapping cycleIndex to 0,1,2,
-          // use a global counter that advances each time a photo slide is needed.
-          let photoIndex = photoGlobalCounter % photoSlides.length;
-          photoGlobalCounter++;
-          return photoSlides[photoIndex];
+          // Photo slide: return an object with type "photo"
+          const url = photoSlides[photoCounter % photoSlides.length];
+          photoCounter++;
+          return { type: "photo", title: "", content: url, sidenote: "" };
         } else if (cycleIndex === 3) {
-          // For the text slide, cycle through textSlides.
-          let textCycle = Math.floor((counter - 1) / 5);
-          let textIndex = textCycle % textSlides.length;
-          return textSlides[textIndex];
+          // Text slide: alternate between textSlides and jokeSlides.
+          let slide;
+          if (textCounter % 2 === 0) {
+            slide = textSlides[(textCounter / 2) % textSlides.length];
+          } else {
+            const joke =
+              jokeSlides[Math.floor(textCounter / 2) % jokeSlides.length];
+            slide = {
+              title: "La Vitrine à Blagues",
+              content: joke.content,
+              sidenote: joke.sidenote,
+            };
+          }
+          textCounter++;
+          return {
+            type: "text",
+            title: slide.title,
+            content: slide.content,
+            sidenote: slide.sidenote || "",
+          };
         } else {
-          // For cycleIndex === 4, return the weather slide.
-          return { type: "weather", content: screenshotMachineUrl };
+          // Weather slide: return an object with type "weather"
+          return {
+            type: "weather",
+            title: "",
+            content: screenshotMachineUrl,
+            sidenote: "",
+          };
         }
       }
 
@@ -490,58 +282,75 @@
         const slideEl = document.createElement("div");
         slideEl.classList.add("slide");
 
-        // If this is an image slide, add a class for full-height image styling.
-        if (slideData.type === "image") {
+        if (slideData.type === "photo") {
           slideEl.classList.add("image-slide");
-        }
-
-        if (slideData.type === "image" || slideData.type === "weather") {
+          const imgEl = document.createElement("img");
+          imgEl.src = slideData.content;
+          slideEl.appendChild(imgEl);
+        } else if (slideData.type === "weather") {
+          slideEl.classList.add("image-slide");
           const imgEl = document.createElement("img");
           imgEl.src = slideData.content;
           slideEl.appendChild(imgEl);
         } else if (slideData.type === "text") {
-          const titleEl = document.createElement("div");
-          titleEl.classList.add("title");
-          titleEl.textContent = slideData.title;
-
-          const contentEl = document.createElement("div");
-          contentEl.classList.add("content");
-
-          // Create a child container with fixed dimensions
-          const fitContainer = document.createElement("div");
-          fitContainer.classList.add("fitme");
-          // Set inline styles for fixed dimensions:
-          fitContainer.style.width = "900px";
-          fitContainer.style.height = "300px";
-          fitContainer.style.overflow = "hidden";
-          fitContainer.textContent = slideData.content;
-
-          contentEl.appendChild(fitContainer);
-          slideEl.appendChild(titleEl);
-          slideEl.appendChild(contentEl);
-
-          // Wait a brief moment to ensure the element is laid out,
-          // then call textFit:
-          setTimeout(() => {
-            textFit(fitContainer, {
-              alignHoriz: true,
-              alignVert: true,
-              multiLine: true,
-              maxFontSize: 96,
-            });
-          }, 50);
-
-          // If a sidenote exists, create and append it.
-          if (slideData.sidenote) {
-            const sidenoteEl = document.createElement("div");
-            sidenoteEl.classList.add("sidenote");
-            sidenoteEl.textContent = slideData.sidenote;
-            slideEl.appendChild(sidenoteEl);
-          }
+          // Delegate to the common text-slide rendering function.
+          renderTextSlide(slideData);
+          return;
         }
 
         slidesContainer.appendChild(slideEl);
         setTimeout(() => slideEl.classList.add("active"), 100);
+      }
+
+      function renderTextSlide(slideData) {
+        const slidesContainer = document.getElementById("slides");
+        slidesContainer.innerHTML = "";
+        const slideEl = document.createElement("div");
+        slideEl.classList.add("slide");
+
+        const titleEl = document.createElement("div");
+        titleEl.classList.add("title");
+        titleEl.textContent = slideData.title;
+
+        const contentEl = document.createElement("div");
+        contentEl.classList.add("content");
+
+        const fitContainer = document.createElement("div");
+        fitContainer.classList.add("fitme");
+        // Set fixed dimensions inline (or via CSS)
+        fitContainer.style.width = "1100px";
+        fitContainer.style.height = "500px";
+        fitContainer.style.overflow = "hidden";
+        fitContainer.textContent = slideData.content;
+
+        // If the content contains "noble" (case-insensitive), use Montserrat Light Italic.
+        if (slideData.content.toLowerCase().includes("noble")) {
+          fitContainer.style.fontStyle = "italic";
+          fitContainer.style.fontWeight = "300";
+        }
+
+        contentEl.appendChild(fitContainer);
+        slideEl.appendChild(titleEl);
+        slideEl.appendChild(contentEl);
+
+        if (slideData.sidenote) {
+          const sidenoteEl = document.createElement("div");
+          sidenoteEl.classList.add("sidenote");
+          sidenoteEl.textContent = slideData.sidenote;
+          slideEl.appendChild(sidenoteEl);
+        }
+
+        slidesContainer.appendChild(slideEl);
+        setTimeout(() => slideEl.classList.add("active"), 100);
+
+        setTimeout(() => {
+          textFit(fitContainer, {
+            alignHoriz: true,
+            alignVert: true,
+            multiLine: true,
+            maxFontSize: 96,
+          });
+        }, 50);
       }
 
       function nextSlide() {
@@ -556,14 +365,6 @@
 
       setInterval(nextSlide, slideDuration);
       renderSlide();
-
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "ArrowRight") {
-          nextSlide();
-        } else if (event.key === "ArrowLeft") {
-          previousSlide();
-        }
-      });
 
       /*********************
        * Banner Updates
@@ -736,6 +537,44 @@
           return entry[1] ? entry[0] : "";
         }
         return "";
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          nextSlide();
+        } else if (event.key === "ArrowLeft") {
+          previousSlide();
+        } else if (event.key === "ArrowUp") {
+          // Cycle backwards through text slides only.
+          cheatTextCounter = cheatTextCounter > 0 ? cheatTextCounter - 1 : 0;
+          renderCheatTextSlide();
+        } else if (event.key === "ArrowDown") {
+          // Cycle forwards through text slides only.
+          cheatTextCounter++;
+          renderCheatTextSlide();
+        }
+      });
+
+      let cheatTextCounter = 0;
+
+      function getCheatTextSlide() {
+        // Alternate between textSlides and jokeSlides:
+        if (cheatTextCounter % 2 === 0) {
+          return textSlides[(cheatTextCounter / 2) % textSlides.length];
+        } else {
+          const joke =
+            jokeSlides[Math.floor(cheatTextCounter / 2) % jokeSlides.length];
+          return {
+            title: "La Vitrine à Blagues",
+            content: joke.content,
+            sidenote: joke.sidenote || "",
+          };
+        }
+      }
+
+      function renderCheatTextSlide() {
+        const slideData = getCheatTextSlide();
+        renderTextSlide(slideData);
       }
     </script>
   </body>
