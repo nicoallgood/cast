@@ -2,7 +2,7 @@ const textSlides = [
         {
           title: "À déguster cette semaine",
           content:
-            "Nos tripes cuisinées, lasagnes, ou encore la tête de veau cuite",
+            "Notre pot-au-feu! Ou bien nos tripes cuisinées, lasagnes et autres plats préparés.",
           sidenote: "",
         },
         {
