@@ -1,10 +1,16 @@
 const textSlides = [
         {
-          title: "À déguster cette semaine",
+          title: "Notre viande chez les chefs",
           content:
-            "Notre pot-au-feu! Ou nos tripes cuisinées, lasagnes et autres plats préparés.",
-          sidenote: "",
+            "Chef Hervé aux Terrasses du Lac, chef Max chez Mazette, chef Stéphane à l'Esquisse.",
+          sidenote: "Rendez-vous dans leurs restaurants 🍽️",
         },
+        // {
+        //  title: "À déguster cette semaine",
+        //  content:
+        //    "Notre pot-au-feu! Ou nos tripes cuisinées, lasagnes et autres plats préparés.",
+        //  sidenote: "",
+        // },
         {
           title: "",
           content:
