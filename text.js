@@ -1,9 +1,9 @@
 const textSlides = [
         {
-          title: "Notre viande chez les chefs",
+          title: "On passe à table!",
           content:
-            "Chef Hervé aux Terrasses du Lac, chef Max chez Mazette, chef Stéphane à l'Esquisse.",
-          sidenote: "Rendez-vous dans leurs restaurants 🍽️",
+            "Les Terrasses du Lac - Mazette! - L'Esquisse.",
+          sidenote: "Retrouvez notre viande au menu 🍽️",
         },
         // {
         //  title: "À déguster cette semaine",
