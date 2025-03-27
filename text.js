@@ -5,12 +5,12 @@ const textSlides = [
             "Les Terrasses du Lac - Mazette! - L'Esquisse",
           sidenote: "Retrouvez notre viande au menu 🍽️",
         },
-        // {
-        //  title: "À déguster cette semaine",
-        //  content:
-        //    "Notre pot-au-feu! Ou nos tripes cuisinées, lasagnes et autres plats préparés.",
-        //  sidenote: "",
-        // },
+        {
+         title: "À déguster cette semaine",
+         content:
+           "Tête de veau cuite, lasagnes, tartiflette, croûtes au ris de veau!",
+         sidenote: "",
+        },
         {
           title: "",
           content:
