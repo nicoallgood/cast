@@ -1,5 +1,11 @@
 const textSlides = [
         {
+          title: "Bientôt Pâques!",
+          content:
+            "Agneau de lait des Pyrénees - Agneau de Pauillac - Agneau des Prés Salés ",
+          sidenote: "Pensez à commander à l'avance 😋",
+        },
+        {
           title: "On passe à table!",
           content:
             "Les Terrasses du Lac - Mazette! - L'Esquisse",
@@ -8,8 +14,14 @@ const textSlides = [
         {
          title: "À déguster cette semaine",
          content:
-           "Tête de veau cuite, lasagnes, tartiflette, croûtes au ris de veau!",
-         sidenote: "",
+           "Tête de veau cuite, lasagnes, croûtes au ris de veau",
+         sidenote: "Et n'oubliez pas Pâques qui approche!",
+        },
+        {
+          title: "Bientôt Pâques!",
+          content:
+            "Agneau de lait des Pyrénees - Agneau de Pauillac - Agneau des Prés Salés ",
+          sidenote: "Pensez à commander à l'avance 😋",
         },
         {
           title: "",
