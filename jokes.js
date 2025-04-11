@@ -3,9 +3,13 @@ const jokeSlides = [
         //   content: "Qu'est-ce qui est rouge, qui ce mange, et qui n'est pas un steak?",
         //   sidenote: "Indice: la réponse est dans la question!",
         // },
+        // {
+        //   content: "Que fait une vache quand elle a les yeux fermés?",
+        //   sidenote: "Demandez la réponse à votre artisan!",
+        // },
         {
-          content: "Que fait une vache quand elle a les yeux fermés?",
-          sidenote: "Demandez la réponse à votre artisan!",
+          content: "La maîtresse demande à Toto: nomme un mammifère sans dent?",
+          sidenote: "Toto: ma mamie!👩‍🦳 (et merci Clémence pour ta blague 👍)",
         },
         // {
         //   content: "Quelle est la différence entre un marin et un boucher?",
