@@ -1,8 +1,8 @@
 const textSlides = [
         {
-          title: "Bientôt Pâques!",
+          title: "Attention",
           content:
-            "Agneau de lait des Pyrénees - Agneau de Pauillac - Agneau des Prés Salés ",
+            "La ",
           sidenote: "Pensez à commander à l'avance 😋",
         },
         {
