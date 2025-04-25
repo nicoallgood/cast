@@ -2,8 +2,8 @@ const textSlides = [
         {
           title: "Attention",
           content:
-            "La ",
-          sidenote: "Pensez à commander à l'avance 😋",
+            "La boucherie est fermée du lundi 28 avril au lundi 5 mai.",
+          sidenote: "Ouverture le mardi 6 Mai 😋",
         },
         {
           title: "On passe à table!",
