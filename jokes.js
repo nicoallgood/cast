@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-          content: "Qu'est-ce que les Mayas utilisaient pour couper la viande?",
-          sidenote: "Un couteau aztèque!",
+          content: "Que fait un rat pour se faire beau?",
+          sidenote: "Il met un masque-à-rat! 🐀",
         },
+        // {
+        //   content: "Qu'est-ce que les Mayas utilisaient pour couper la viande?",
+        //   sidenote: "Un couteau aztèque!",
+        // },
         // {
         //   content: "Qu'est-ce qui est rouge, qui ce mange, et qui n'est pas un steak?",
         //   sidenote: "Indice: la réponse est dans la question!",
