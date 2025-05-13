@@ -478,19 +478,19 @@
         const summaryDiv = document.getElementById("weatherSummary");
 
         // BROKEN ON PURPOSE FOR NOW
-        fetch("https://wtttr.in/Annecy?lang=fr&0&M")
-          .then((response) => response.text())
-          .then((ascii) => {
-            let pre = document.createElement("pre");
-            pre.style.margin = "0";
-            pre.style.fontFamily = "monospace";
-            pre.textContent = ascii;
-            asciiDiv.innerHTML = "";
-            asciiDiv.appendChild(pre);
-          })
-          .catch((err) => {
-            asciiDiv.textContent = "";
-          });
+        // fetch("https://wtttr.in/Annecy?lang=fr&0&M")
+        //   .then((response) => response.text())
+        //   .then((ascii) => {
+        //     let pre = document.createElement("pre");
+        //     pre.style.margin = "0";
+        //     pre.style.fontFamily = "monospace";
+        //     pre.textContent = ascii;
+        //     asciiDiv.innerHTML = "";
+        //     asciiDiv.appendChild(pre);
+        //   })
+        //   .catch((err) => {
+        //     asciiDiv.textContent = "";
+        //   });
 
         fetch("https://wttr.in/Annecy?format=j1")
           .then((response) => response.json())
