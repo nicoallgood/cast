@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-          content: "Que fait un rat pour se faire beau?",
-          sidenote: "Il met un masque-à-rat! 🐀",
+          content: "Deux saucissons participent à une course. Le 2ème est très déçu: « Sur la fin je me suis fait fumer.. »  ",
+          sidenote: "🏎️🏎️",
         },
+        // {
+        //   content: "Que fait un rat pour se faire beau?",
+        //   sidenote: "Il met un masque-à-rat! 🐀",
+        // },
         // {
         //   content: "Qu'est-ce que les Mayas utilisaient pour couper la viande?",
         //   sidenote: "Un couteau aztèque!",
