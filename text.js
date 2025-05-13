@@ -5,16 +5,16 @@ const textSlides = [
             "Les Terrasses du Lac - Mazette! - L'Esquisse",
           sidenote: "Retrouvez notre viande au menu 🍽️",
         },
-        // {
-        //  title: "À déguster cette semaine",
-        //  content:
-        //    "Tête de veau cuite, lasagnes, croûtes au ris de veau",
-        //  sidenote: "",
-        // },
         {
-          title: "",
-          content:
-            "La viande fabrique de l'amitié, du respect. C'est un produit si noble qu'il génère comme aucun autre de la complicité et de l'humanité entre les hommes.",
-          sidenote: "",
+         title: "Fermeture exceptionnelle",
+         content:
+           "Nous serons fermés ce dimanche 18 mai",
+         sidenote: "",
         },
+        // {
+        //   title: "",
+        //   content:
+        //     "La viande fabrique de l'amitié, du respect. C'est un produit si noble qu'il génère comme aucun autre de la complicité et de l'humanité entre les hommes.",
+        //   sidenote: "",
+        // },
       ];
