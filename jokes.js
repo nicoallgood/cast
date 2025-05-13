@@ -1,6 +1,6 @@
 const jokeSlides = [
         {
-          content: "Deux saucissons participent à une course. Le 2ème est très déçu: « Sur la fin je me suis fait fumer.. »  ",
+          content: "Deux saucissons participent à une course. Le 2ème est très déçu: « Sur la fin je me suis fait fumer... »  ",
           sidenote: "🏎️🏎️",
         },
         // {
