@@ -6,10 +6,10 @@ const textSlides = [
           sidenote: "Retrouvez notre viande au menu 🍽️",
         },
         {
-         title: "Fermeture exceptionnelle",
+         title: "Et les vainqueurs sont!",
          content:
-           "Nous serons fermés ce dimanche 18 mai",
-         sidenote: "",
+           "Axelle et Paul, vous avez gagné le jeu du printemps!",
+         sidenote: "2 places pour les médiévales 🏆",
         },
         // {
         //   title: "",
