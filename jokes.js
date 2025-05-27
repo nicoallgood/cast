@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-          content: "Deux saucissons participent à une course. Le 2ème est très déçu: « Sur la fin je me suis fait fumer... »  ",
-          sidenote: "🏎️🏎️",
+          content: "Que fait un boulanger qui traîne sur la photocopieuse? 🖨️🖨️",
+          sidenote: "Demandez à votre boucher!",
         },
+        // {
+        //   content: "Deux saucissons participent à une course. Le 2ème est très déçu: « Sur la fin je me suis fait fumer... »  ",
+        //   sidenote: "🏎️🏎️",
+        //},
         // {
         //   content: "Que fait un rat pour se faire beau?",
         //   sidenote: "Il met un masque-à-rat! 🐀",
