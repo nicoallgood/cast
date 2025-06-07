@@ -1,7 +1,7 @@
 const jokeSlides = [
         {
-          content: "Que fait un boulanger qui traîne sur la photocopieuse? 🖨️🖨️",
-          sidenote: "Demandez à votre boucher!",
+          content: "Qu'est ce que l'on peut écraser seulement avec son pied gauche et pas avec le droit?",
+          sidenote: "👣⁉️",
         },
         // {
         //   content: "Deux saucissons participent à une course. Le 2ème est très déçu: « Sur la fin je me suis fait fumer... »  ",
