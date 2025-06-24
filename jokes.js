@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-          content: "M. et Mme. Bonbeurre ont un fils! Comment s'appelle-t-il?",
-          sidenote: "🐖",
+          content: "Quel est le comble pour un électricien?",
+          sidenote: "D'avoir des 💡💡 au pied!",
         },
+        // {
+        //   content: "M. et Mme. Bonbeurre ont un fils! Comment s'appelle-t-il?",
+        //   sidenote: "🐖",
+        // },
         // {
         //   content: "Qu'est ce que l'on peut écraser seulement avec son pied gauche et pas avec le droit?",
         //   sidenote: "👣⁉️",
