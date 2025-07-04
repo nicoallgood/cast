@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-          content: "Quel est le comble pour un électricien?",
-          sidenote: "D'avoir des 💡💡 au pied!",
+          content: "Combat de judo entre un plombier et un électricien. Qui gagne? 🥋",
+          sidenote: "Indice: celui qui connaît toutes les ...",
         },
+        // {
+        //   content: "Quel est le comble pour un électricien?",
+        //   sidenote: "D'avoir des 💡💡 au pied!",
+        // },
         // {
         //   content: "M. et Mme. Bonbeurre ont un fils! Comment s'appelle-t-il?",
         //   sidenote: "🐖",
