@@ -1,7 +1,7 @@
 const jokeSlides = [
         {
-          content: "Combat de judo entre un plombier et un électricien. Qui gagne? 🥋",
-          sidenote: "Indice: celui qui connaît toutes les ...",
+          content: "Quel est le crustacé le plus léger de la mer? 🐚",
+          sidenote: "Indice: il n'est pas très lourd",
         },
         // {
         //   content: "Quel est le comble pour un électricien?",
