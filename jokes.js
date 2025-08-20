@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-          content: "Quel est le crustacé le plus léger de la mer? 🐚",
-          sidenote: "Indice: il n'est pas très lourd",
+          content: "Pourquoi les thons ne s'énervent qu'à la surface de l'eau? 🐟",
+          sidenote: "😡⬆️",
         },
+        // {
+        //  content: "Quel est le crustacé le plus léger de la mer? 🐚",
+        //  sidenote: "Indice: il n'est pas très lourd",
+        // },
         // {
         //   content: "Quel est le comble pour un électricien?",
         //   sidenote: "D'avoir des 💡💡 au pied!",
