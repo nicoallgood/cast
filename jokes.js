@@ -1,11 +1,19 @@
 const jokeSlides = [
+        // {
+        //   content: "Ton vieil ami jardinier, il s'appelle comment déjà?",
+        //   sidenote: "🌽🫜🥦🥕🥕🍅🥔🥔🍆",
+        // },
         {
-          content: "Pourquoi les thons ne s'énervent qu'à la surface de l'eau? 🐟",
-          sidenote: "😡⬆️",
+          content: "Pourquoi les canards sont-ils toujours à l'heure? 🦆",
+          sidenote: "Parce qu'ils sont _ _ _ !",
         },
         // {
-        //  content: "Quel est le crustacé le plus léger de la mer? 🐚",
-        //  sidenote: "Indice: il n'est pas très lourd",
+        //   content: "Pourquoi les thons ne s'énervent qu'à la surface de l'eau? 🐟",
+        //   sidenote: "😡⬆️",
+        // },
+        // {
+        //   content: "Quel est le crustacé le plus léger de la mer? 🐚",
+        //   sidenote: "Indice: il n'est pas très lourd",
         // },
         // {
         //   content: "Quel est le comble pour un électricien?",
