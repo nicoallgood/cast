@@ -1,12 +1,12 @@
 const jokeSlides = [
+         {
+           content: "Ton ami jardinier qui n'est plus tout jeune, tu le surnommes comment déjà?",
+           sidenote: "🌽🥦🥕🥕🍅🥔🥔🍆",
+         },
         // {
-        //   content: "Ton vieil ami jardinier, il s'appelle comment déjà?",
-        //   sidenote: "🌽🫜🥦🥕🥕🍅🥔🥔🍆",
+        //  content: "Pourquoi les canards sont-ils toujours à l'heure? 🦆",
+        //  sidenote: "Parce qu'ils sont _ _ _ !",
         // },
-        {
-          content: "Pourquoi les canards sont-ils toujours à l'heure? 🦆",
-          sidenote: "Parce qu'ils sont _ _ _ !",
-        },
         // {
         //   content: "Pourquoi les thons ne s'énervent qu'à la surface de l'eau? 🐟",
         //   sidenote: "😡⬆️",
