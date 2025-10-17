@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-           content: "La différence entre la Tour Eiffel est un prisonnier? 🤔",
-           sidenote: "Indice: en quelle matière?",
+           content: "Pourquoi les poissons japonais ont-ils toujours une seconde vie? 🏯 ",
+           sidenote: "🐠🍚",
         },
+        // {
+        //    content: "La différence entre la Tour Eiffel est un prisonnier? 🤔",
+        //    sidenote: "Indice: en quelle matière?",
+        // },
         // {
         //   content: "Ton ami jardinier qui n'est plus tout jeune, tu le surnommes comment déjà?",
         //   sidenote: "🌽🥦🥕🥕🍅🥔🥔🍆",
