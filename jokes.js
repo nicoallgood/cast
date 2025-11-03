@@ -1,8 +1,20 @@
 const jokeSlides = [
         {
-           content: "Pourquoi les poissons japonais ont-ils toujours une seconde vie? 🏯 ",
-           sidenote: "🐠🍚",
+           content: "Qu'est ce que les cochons ne doivent jamais oublier lorsqu'ils prennent l'avion? ✈️ ",
+           sidenote: "🐷",
         },
+        // {
+        //    content: "Quel est le comble pour un avion stationné?",
+        //    sidenote: "🔒",
+        // },
+        // {
+        //    content: "Pourquoi les cochons ne sont jamais embêtés par le trafic? 🚗🚙",
+        //    sidenote: "🐖",
+        // },
+        // {
+        //    content: "Pourquoi les poissons japonais ont-ils toujours une seconde vie? 🏯 ",
+        //    sidenote: "🐠🍚",
+        // },
         // {
         //    content: "La différence entre la Tour Eiffel est un prisonnier? 🤔",
         //    sidenote: "Indice: en quelle matière?",
