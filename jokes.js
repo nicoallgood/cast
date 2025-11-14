@@ -1,12 +1,12 @@
 const jokeSlides = [
-        {
-           content: "Qu'est ce que les cochons ne doivent jamais oublier lorsqu'ils prennent l'avion? ✈️ ",
-           sidenote: "🐷",
-        },
         // {
-        //    content: "Quel est le comble pour un avion stationné?",
-        //    sidenote: "🔒",
+        //    content: "Qu'est ce que les cochons ne doivent jamais oublier lorsqu'ils prennent l'avion? ✈️ ",
+        //    sidenote: "🐷",
         // },
+        {
+           content: "Quel est le comble pour un avion stationné?",
+           sidenote: "🔒",
+        },
         // {
         //    content: "Pourquoi les cochons ne sont jamais embêtés par le trafic? 🚗🚙",
         //    sidenote: "🐖",
