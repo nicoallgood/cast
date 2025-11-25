@@ -4,9 +4,13 @@ const jokeSlides = [
         //    sidenote: "🐷",
         // },
         {
-           content: "Quel est le comble pour un avion stationné?",
+           content: "J'ai plusieurs coeurs mais aucun organe. Je ne pique pas, pourtant j'ai des piques. Qui suis-je?",
            sidenote: "🔒",
         },
+        // {
+        //    content: "Quel est le comble pour un avion stationné?",
+        //    sidenote: "🔒",
+        // },
         // {
         //    content: "Pourquoi les cochons ne sont jamais embêtés par le trafic? 🚗🚙",
         //    sidenote: "🐖",
