@@ -3,18 +3,18 @@ const jokeSlides = [
         //    content: "Qu'est ce que les cochons ne doivent jamais oublier lorsqu'ils prennent l'avion? ✈️ ",
         //    sidenote: "🐷",
         // },
-        {
-           content: "J'ai plusieurs coeurs mais aucun organe. Je ne pique pas, pourtant j'ai des piques. Qui suis-je?",
-           sidenote: "🔒",
-        },
+        // {
+        //    content: "J'ai plusieurs coeurs mais aucun organe. Je ne pique pas, pourtant j'ai des piques. Qui suis-je?",
+        //    sidenote: "🔒",
+        // },
         // {
         //    content: "Quel est le comble pour un avion stationné?",
         //    sidenote: "🔒",
         // },
-        // {
-        //    content: "Pourquoi les cochons ne sont jamais embêtés par le trafic? 🚗🚙",
-        //    sidenote: "🐖",
-        // },
+        {
+           content: "Pourquoi les cochons ne sont jamais embêtés par le trafic? 🚗🚙",
+           sidenote: "🐖",
+        },
         // {
         //    content: "Pourquoi les poissons japonais ont-ils toujours une seconde vie? 🏯 ",
         //    sidenote: "🐠🍚",
