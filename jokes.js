@@ -1,4 +1,8 @@
 const jokeSlides = [
+        {
+           content: "Quelle est la touche préférée des astronautes sur un clavier? 💻",
+           sidenote: "🌠",
+        },
         // {
         //    content: "Qu'est ce que les cochons ne doivent jamais oublier lorsqu'ils prennent l'avion? ✈️ ",
         //    sidenote: "🐷",
@@ -11,10 +15,10 @@ const jokeSlides = [
         //    content: "Quel est le comble pour un avion stationné?",
         //    sidenote: "🔒",
         // },
-        {
-           content: "Pourquoi les cochons ne sont jamais embêtés par le trafic? 🚗🚙",
-           sidenote: "🐖",
-        },
+        // {
+        //    content: "Pourquoi les cochons ne sont jamais embêtés par le trafic? 🚗🚙",
+        //    sidenote: "🐖",
+        // },
         // {
         //    content: "Pourquoi les poissons japonais ont-ils toujours une seconde vie? 🏯 ",
         //    sidenote: "🐠🍚",
