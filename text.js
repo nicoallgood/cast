@@ -14,7 +14,7 @@ const textSlides = [
         {
           title: "",
           content:
-            "Joyeuses Fêtes!",
+            "☃️ Joyeuses Fêtes ☃️",
           sidenote: "et bon appétit!",
         },
       ];
