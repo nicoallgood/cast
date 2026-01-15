@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-           content: "Quelle est la touche préférée des astronautes sur un clavier? 💻",
-           sidenote: "🌠",
+           content: "Pourquoi les pigeons roux ne vont-ils pas à la piscine? 💦",
+           sidenote: "🐦",
         },
+        // {
+        //    content: "Quelle est la touche préférée des astronautes sur un clavier? 💻",
+        //    sidenote: "🌠",
+        // },
         // {
         //    content: "Qu'est ce que les cochons ne doivent jamais oublier lorsqu'ils prennent l'avion? ✈️ ",
         //    sidenote: "🐷",
