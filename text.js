@@ -2,7 +2,7 @@ const textSlides = [
         {
           title: "On passe à table!",
           content:
-            "Les Terrasses du Lac - Mazette! - L'Esquisse",
+            "Les Terrasses du Lac - 1er Mets - Mazette! - L'Esquisse",
           sidenote: "Retrouvez notre viande au menu 🍽️",
         },
         // {
@@ -14,7 +14,7 @@ const textSlides = [
         {
           title: "",
           content:
-            "☃️ Joyeuses Fêtes ☃️",
-          sidenote: "et bon appétit!",
+            "🥳 Bonne année 🥳",
+          sidenote: "et bonne santé, et bon appétit!",
         },
       ];
