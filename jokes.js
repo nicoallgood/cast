@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-           content: "Pourquoi les pigeons roux ne vont-ils pas à la piscine? 💦",
-           sidenote: "🐦",
+           content: "Pourquoi les bouquins n'ont-ils jamais froid? 📚",
+           sidenote: "📘📒📕",
         },
+        // {
+        //    content: "Pourquoi les pigeons roux ne vont-ils pas à la piscine? 💦",
+        //    sidenote: "🐦",
+        // },
         // {
         //    content: "Quelle est la touche préférée des astronautes sur un clavier? 💻",
         //    sidenote: "🌠",
