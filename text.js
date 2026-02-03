@@ -5,16 +5,22 @@ const textSlides = [
             "Les Terrasses du Lac - 1er Mets - Mazette! - L'Esquisse",
           sidenote: "Retrouvez notre viande au menu 🍽️",
         },
+        {
+          title: "Interro'Boc!!",
+          content:
+            "En quelle année la Boucherie Bocquet a-t-elle ouverte?",
+          sidenote: "59, 65 ou 69 ? 🧐",
+        },
         // {
         //  title: "Et les vainqueurs sont!",
         //  content:
         //    "Axelle et Paul, vous avez gagné le jeu du printemps!",
         //  sidenote: "2 places pour les médiévales 🏆",
         // },
-        {
-          title: "",
-          content:
-            "🥳 Bonne année 🥳",
-          sidenote: "et bonne santé, et bon appétit!",
-        },
+        // {
+        //   title: "",
+        //   content:
+        //     "🥳 Bonne année 🥳",
+        //   sidenote: "et bonne santé, et bon appétit!",
+        // },
       ];
