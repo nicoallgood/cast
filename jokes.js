@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-           content: "Pourquoi les bouquins n'ont-ils jamais froid? 📚",
-           sidenote: "📘📒📕",
+           content: "Quel fruit les poissons détestent-ils?",
+           sidenote: "🐟",
         },
+        // {
+        //    content: "Pourquoi les bouquins n'ont-ils jamais froid? 📚",
+        //    sidenote: "📘📒📕",
+        // },
         // {
         //    content: "Pourquoi les pigeons roux ne vont-ils pas à la piscine? 💦",
         //    sidenote: "🐦",
