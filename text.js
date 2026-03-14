@@ -1,10 +1,10 @@
 const textSlides = [
-        {
-          title: "Fermeture semaine prochaine!",
-          content:
-            "Nous serons fermés du dimanche 8 février au mardi 17 février inclus.",
-          sidenote: "Réouverture le mercredi 18! 🥳",
-        },
+        // {
+        //   title: "Fermeture semaine prochaine!",
+        //   content:
+        //     "Nous serons fermés du dimanche 8 février au mardi 17 février inclus.",
+        //   sidenote: "Réouverture le mercredi 18! 🥳",
+        // },
         {
           title: "On passe à table!",
           content:
