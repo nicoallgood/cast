@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-           content: "Quel fruit les poissons détestent-ils?",
-           sidenote: "🐟",
+           content: "Que dit un citron bandit quand il rentre dans une banque? 🍋",
+           sidenote: "🏦",
         },
+        // {
+        //    content: "Quel fruit les poissons détestent-ils?",
+        //    sidenote: "🐟",
+        // },
         // {
         //    content: "Pourquoi les bouquins n'ont-ils jamais froid? 📚",
         //    sidenote: "📘📒📕",
