@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-           content: "Que dit un citron bandit quand il rentre dans une banque? 🍋",
-           sidenote: "🏦",
+           content: "La famille Ate et la famille Ique ont chacune un fils, comment s'appelent-ils? 👦 ",
+           sidenote: "🍽️",
         },
+        // {
+        //    content: "Que dit un citron bandit quand il rentre dans une banque? 🍋",
+        //    sidenote: "🏦",
+        // },
         // {
         //    content: "Quel fruit les poissons détestent-ils?",
         //    sidenote: "🐟",
