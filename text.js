@@ -14,7 +14,7 @@ const textSlides = [
         {
           title: "Interro'Boc!!",
           content:
-            "Je suis un poisson qui se cache dans le boeuf, que suis-je?",
+            "Je suis un poisson qui se cache dans le bœuf, que suis-je?",
           sidenote: "🐟",
         },
         // {
