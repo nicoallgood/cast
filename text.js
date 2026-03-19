@@ -14,8 +14,14 @@ const textSlides = [
         {
           title: "Interro'Boc!!",
           content:
-            "En quelle année la Boucherie Bocquet a-t-elle ouverte?",
-          sidenote: "59, 65 ou 69 ? 🧐",
+            "Je suis un poisson qui se cache dans le boeuf, que suis-je?",
+          sidenote: "🐟",
+        },
+        // {
+        //   title: "Interro'Boc!!",
+        //   content:
+        //     "En quelle année la Boucherie Bocquet a-t-elle ouverte?",
+        //   sidenote: "59, 65 ou 69 ? 🧐",
         },
         // {
         //  title: "Et les vainqueurs sont!",
