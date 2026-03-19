@@ -22,7 +22,7 @@ const textSlides = [
         //   content:
         //     "En quelle année la Boucherie Bocquet a-t-elle ouverte?",
         //   sidenote: "59, 65 ou 69 ? 🧐",
-        },
+        // },
         // {
         //  title: "Et les vainqueurs sont!",
         //  content:
