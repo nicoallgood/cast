@@ -4,7 +4,7 @@ const jokeSlides = [
         //    sidenote: "Parce que leur..",
         // },
         {
-           content: "La famille Ate et la famille Ique ont chacune un fils, comment s'appelent-ils? 👦 ",
+           content: "La famille Ate et la famille Ique ont chacune un fils, comment s'appellent-ils? 👦 ",
            sidenote: "🍽️",
         },
         // {
