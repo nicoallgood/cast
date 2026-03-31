@@ -1,10 +1,10 @@
 const textSlides = [
-        // {
-        //   title: "Fermeture semaine prochaine!",
-        //   content:
-        //     "Nous serons fermés du dimanche 8 février au mardi 17 février inclus.",
-        //   sidenote: "Réouverture le mercredi 18! 🥳",
-        // },
+        {
+          title: "Fermeture semaine prochaine!",
+          content:
+            "Nous serons fermés du lundi 6 avril au mercredi 15 avril inclus.",
+          sidenote: "Réouverture le jeudi 17! 🥳",
+        },
         {
           title: "On passe à table!",
           content:
@@ -12,11 +12,17 @@ const textSlides = [
           sidenote: "Retrouvez notre viande au menu 🍽️",
         },
         {
-          title: "Interro'Boc!!",
+          title: "Interro'Boc!",
           content:
-            "Je suis un poisson qui se cache dans le bœuf, que suis-je?",
-          sidenote: "🐟",
+            "Je suis un fruit qui pousse dans le bœuf, que suis-je?",
+          sidenote: "🌳",
         },
+        // {
+        //   title: "Interro'Boc!!",
+        //   content:
+        //     "Je suis un poisson qui se cache dans le bœuf, que suis-je?",
+        //   sidenote: "🐟",
+        // },
         // {
         //   title: "Interro'Boc!!",
         //   content:
