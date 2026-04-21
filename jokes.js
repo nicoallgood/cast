@@ -1,8 +1,12 @@
 const jokeSlides = [
         {
-           content: "Pourquoi les bouchers sont-ils toujours heureux? 😀",
-           sidenote: "Parce que leur ...",
+           content: "Pourquoi votre bouchère vous propose un rayon vin? 🍷",
+           sidenote: "Parce qu'elle affectionne les ...",
         },
+        // {
+        //    content: "Pourquoi les bouchers sont-ils toujours heureux? 😀",
+        //    sidenote: "Parce que leur ...",
+        // },
         // {
         //    content: "La famille Ate et la famille Ique ont chacune un fils, comment s'appellent-ils? 👦 ",
         //    sidenote: "🍽️",
