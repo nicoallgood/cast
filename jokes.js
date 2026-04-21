@@ -1,7 +1,7 @@
 const jokeSlides = [
         {
-           content: "Pourquoi votre bouchère vous propose un rayon vin? 🍷",
-           sidenote: "Parce qu'elle affectionne les ...",
+           content: "Pourquoi les boucheries ont-elles souvent un rayon vin?",
+           sidenote: "🍷",
         },
         // {
         //    content: "Pourquoi les bouchers sont-ils toujours heureux? 😀",
