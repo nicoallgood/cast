@@ -17,6 +17,12 @@ const textSlides = [
             "Je tisse ma toile aussi bien dans le porc que dans le bœuf, que suis-je?",
           sidenote: "😋",
         },
+        {
+          title: "C'est nouveau!",
+          content:
+            "L'Effilo'Boc 🔥❤️‍🔥 Un délicieux éfiloché pour garnir vos burgers où à manger tel quel!",
+          sidenote: "Recette secrète 🤫",
+        },
         // {
         //   title: "Interro'Boc!",
         //   content:
