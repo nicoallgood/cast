@@ -35,4 +35,9 @@ const photoSlides = [
   "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-26.jpeg",
   "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-28.jpeg",
   "https://www.boucheriebocquet.fr/wp-content/uploads/2025/03/meatTop-29.jpeg",
+  "https://www.boucheriebocquet.fr/wp-content/uploads/2026/04/IMG_3945-scaled.jpeg",
+  "https://www.boucheriebocquet.fr/wp-content/uploads/2026/04/IMG_8389-scaled.jpeg",
+  "https://www.boucheriebocquet.fr/wp-content/uploads/2026/04/IMG_8391-scaled.jpeg",
+  "https://www.boucheriebocquet.fr/wp-content/uploads/2026/04/IMG_8801-scaled.jpeg",
+  "https://www.boucheriebocquet.fr/wp-content/uploads/2026/04/IMG_8798-scaled.jpg",
 ];
