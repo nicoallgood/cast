@@ -1,7 +1,7 @@
 const jokeSlides = [
         {
-           content: "Pourquoi les boucheries ont-elles souvent un rayon vin?",
-           sidenote: "🍷",
+           content: "Quel métier est un parfait remède contre les rides?",
+           sidenote: "💅🏻 (merci Claudia!)",
         },
         // {
         //    content: "Pourquoi les bouchers sont-ils toujours heureux? 😀",
